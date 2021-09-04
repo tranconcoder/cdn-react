@@ -1,0 +1,501 @@
+&__right {
+	@include size(false, 100%);
+
+	.right__sign-in-btn {
+		@include size(12rem, 4.2rem);
+		@include setBtn($primaryColor, #fff);
+		font-size: 1.6rem;
+		font-weight: 400;
+		border-radius: 0.5rem;
+		display: none;
+	}
+
+	.right {
+		@include size(false, 100%);
+		@include flex(row, center);
+
+		&__notify,
+		&__seen-cdn {
+			@include position(relative);
+			margin-right: 2rem;
+
+			&:hover {
+				cursor: pointer;
+
+				& > *:first-child {
+					background-color: #f1f1f1;
+
+					> img {
+						animation: dialogIconHover linear 1s infinite;
+					}
+
+					&::after {
+						@include size(
+							2 * $navbarRightDialogSize,
+							2 * $navbarRightDialogBoxSeperate
+						);
+						@include position(absolute, 100%, 0);
+						@include pseudo;
+						transform: translateY(-50%);
+					}
+				}
+
+				& > *:last-child {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+
+			& > *:first-child {
+				@include size($navbarRightDialogSize);
+				@include position(relative);
+				padding: ($navbarRightDialogSize - $navbarRightDialogIconSize) / 2;
+				border-radius: 50%;
+				transition: linear 0.2s;
+
+				> img {
+					@include size(100%);
+				}
+			}
+		}
+
+		// Notify box
+		&__notify__box {
+			// List
+			> ul {
+				// Item
+				> li:not(.empty) {
+					// Content box
+					> .content > i.more-icon {
+						$moreIconCtnSize: 2rem;
+						$moreIconSize: 1rem;
+
+						@include size(100%, $moreIconCtnSize);
+						align-self: flex-end;
+						background-image: url("http://localhost:3000/img/general/arrow-down-thin.svg");
+						background-size: $moreIconSize;
+						background-repeat: no-repeat;
+						background-position: center;
+						opacity: 0.5;
+						margin-top: 1rem;
+						display: none;
+
+						&:hover {
+							background-color: #e9e9e9;
+						}
+					}
+
+					// Style was seen
+					&.seen > .content > p {
+						color: $textColorLightness;
+					}
+
+					// Style when seeing
+					&.see {
+						@include size(false, auto);
+
+						> .content {
+							> p {
+								display: block;
+							}
+
+							> i.more-icon {
+								display: block;
+								transform: rotate(180deg);
+							}
+						}
+					}
+				}
+
+				// Empty item
+				> li.empty::after {
+					content: "Không có thông báo mới!" !important;
+				}
+			}
+		}
+
+		&__seen-cdn__box {
+			// Empty item
+			> ul > li.empty::after {
+				content: "Gần đây chưa xem cdn nào!" !important;
+			}
+		}
+
+		// Notify and Seen cdn boxs
+		&__notify__box,
+		&__seen-cdn__box {
+			@include size($navbarRightDialogBoxWidth, auto);
+			@include flex(column, stretch);
+			@include position(absolute, 100%, 0);
+			margin-top: $navbarRightDialogBoxSeperate;
+			border-radius: $navbarRightDialogBoxBorderRadius;
+			box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+			transform-origin: top right;
+			transform: scale(0);
+			opacity: 0;
+			transition: ease 0.5s;
+			overflow: hidden;
+			background-color: #fff;
+			will-change: opacity, transform;
+
+			// Headers
+			> header {
+				$iconSize: 1.8rem;
+				$fontSize: 1.4rem;
+
+				@include size(100%, $navbarRightDialogBoxHeaderHeight);
+				@include flex(row, center);
+				padding-left: 2rem;
+				background-color: $primaryColorBlack;
+
+				& > img {
+					@include size($iconSize);
+				}
+
+				& > p {
+					color: #fff;
+					font-size: $fontSize;
+					font-weight: 400;
+					margin-left: 0.7rem;
+				}
+			}
+
+			// Lists
+			> ul {
+				$dialogBoxListMinHeight: 16rem;
+				$dialogBoxListMaxHeight: $navbarRightDialogBoxMaxHeight -
+					$navbarRightDialogBoxHeaderHeight - $navbarRightDialogBoxFooterBtnHeight;
+				$dialogBoxListEmptyHeight: $dialogBoxListMinHeight;
+
+				@include size(100%, false);
+				@include minSize(false, $dialogBoxListMinHeight);
+				@include maxSize(false, $dialogBoxListMaxHeight);
+				overflow-y: scroll;
+				scroll-snap-type: y mandatory;
+
+				&::-webkit-scrollbar {
+					width: 0.6rem;
+				}
+
+				&::-webkit-scrollbar-track {
+					background-color: transparent;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					background-color: rgb(209, 209, 209);
+				}
+
+				&::-webkit-scrollbar-thumb:hover {
+					background: #b6b6b6;
+				}
+
+				// Items
+				> li:not(.empty) {
+					$itemSeperate: 0.7rem;
+					$iconSeperate: 0.5rem;
+					$thumbSize: 5rem;
+					$removeIconCtnSize: 4rem;
+					$removeIconSize: 1.4rem;
+
+					@include size(100%, $navbarRightDialogBoxItemHeight);
+					@include flex(row, center);
+					scroll-snap-align: start;
+					scroll-margin-top: $itemSeperate;
+					background-color: #fff;
+					border-bottom: 0.1rem solid rgb(230, 230, 230);
+					transition: linear 0.2s;
+					// display: none;
+
+					&:hover {
+						background-color: rgb(250, 250, 250);
+					}
+
+					> .thumb {
+						$paddingSize: ($navbarRightDialogBoxItemHeight - $thumbSize) /2;
+
+						@include size($navbarRightDialogBoxItemHeight);
+						padding: $paddingSize;
+						object-fit: contain;
+					}
+
+					> .content {
+						$paddingSize: 1rem;
+						$width: calc(
+							100% - #{$navbarRightDialogBoxItemHeight} - #{$removeIconCtnSize}
+						);
+
+						@include size($width, 100%);
+						@include flex(column);
+						@include position(relative);
+						padding: $paddingSize;
+
+						> p {
+							@include size(100%);
+							color: $textColor;
+							font: 400 1.4rem "Signika", sans-serif;
+							margin: auto 0;
+							overflow: hidden;
+							display: -webkit-box;
+							text-overflow: ellipsis;
+							-webkit-box-orient: vertical;
+							-webkit-line-clamp: 2;
+							margin: auto 0;
+						}
+					}
+
+					> .remove-icon {
+						@include size($removeIconCtnSize);
+						background-image: url("http://localhost:3000/img/general/close-icon-1.svg");
+						background-size: $removeIconSize;
+						background-repeat: no-repeat;
+						background-position: center;
+						border-radius: 50%;
+						margin-right: 1rem;
+						opacity: 0.7;
+						transition: ease 0.2s;
+
+						&:hover {
+							background-color: #f1f1f1;
+						}
+					}
+				}
+
+				// Item show when empty
+				> li.empty {
+					@include size(100%, $dialogBoxListEmptyHeight);
+					@include position(relative);
+					background-size: 10rem;
+					background-repeat: no-repeat;
+					background-position: center 1rem;
+					// display: none;
+
+					&::after {
+						@include size(100%, auto);
+						@include position(absolute, false, 50%, 0.5rem);
+						@include pseudo;
+						transform: translateX(50%);
+						color: $primaryColorBlack;
+						font-size: 1.4rem;
+						font-weight: 500;
+						text-align: center;
+					}
+				}
+			}
+
+			// Footer
+			> footer {
+				$footerPadding: 0.7rem;
+
+				@include size(
+					100%,
+					$navbarRightDialogBoxFooterBtnHeight + (2 * $footerPadding)
+				);
+				padding: $footerPadding;
+
+				> button {
+					@include size(100%);
+					@include setBtn($primaryColorBlack, #fff, 0.1rem);
+
+					> p {
+						font-size: 1.2rem;
+					}
+				}
+			}
+		}
+
+		&__profile {
+			$moreIconSize: 0.8rem;
+			$moreIconSeperate: 0.5rem;
+			$avatarSize: 4rem;
+
+			@include size($avatarSize);
+			@include position(relative);
+			margin-right: $moreIconSize + $moreIconSeperate;
+
+			&:hover {
+				cursor: pointer;
+
+				& > .profile__box {
+					opacity: 1;
+					transform: scale(1);
+				}
+
+				.profile__avatar__more-icon {
+					transform: translateY(-50%) rotate(180deg);
+				}
+
+				&::before {
+					@include size(2 * $avatarSize, 2 * $navbarRightDialogBoxSeperate);
+					@include position(absolute, calc(100% - 1rem), 0);
+					@include pseudo;
+				}
+			}
+
+			.profile {
+				&__avatar {
+					@include size(100%);
+					@include position(relative);
+
+					&:hover {
+						.profile__avatar__more-icon {
+							transform: translateY(-50%) rotate(180deg);
+						}
+					}
+
+					&__avatar-img {
+						@include size(100%);
+						border-radius: 50%;
+						border: 0.1rem solid $primaryColor;
+					}
+
+					&__more-icon {
+						@include size($moreIconSize);
+						@include position(absolute, 50%, false, false, 100%);
+						margin-left: $moreIconSeperate;
+						transform: translateY(-50%);
+						transition: ease 0.5s;
+					}
+				}
+
+				&__box {
+					@include size($navbarRightDialogBoxWidth, false);
+					@include minSize(false, 10rem);
+					@include position(
+						absolute,
+						calc(100% + #{$navbarRightDialogBoxSeperate}),
+						0
+					);
+					border-radius: $navbarRightDialogBoxBorderRadius;
+					background-color: #fff;
+					transform-origin: top right;
+					opacity: 0;
+					transform: scale(0);
+					transition: ease 0.5s;
+					overflow: hidden;
+					box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+					will-change: transform, opacity;
+
+					// Body
+					&__body {
+						$toolsCtnWidth: 26rem;
+						$toolsItemHeight: 3.6rem;
+						$toolsIconSize: 1.8rem;
+						$toolsItemPaddingLeftRight: 1rem;
+
+						@include size(100%, false);
+						@include flex(column, center);
+
+						// Avatar
+						.avatar-ctn {
+							$marginTopSize: 3rem;
+
+							@include size(100%, false);
+							@include flex(row, center, center);
+							margin-top: $marginTopSize;
+
+							&__avatar {
+								$imageSize: 7rem;
+
+								@include size($imageSize);
+							}
+						}
+
+						// Infomation
+						.info-ctn {
+							$marginTopSize: 1rem;
+
+							@include size(100%, false);
+							@include flex(column, center);
+							margin-top: $marginTopSize;
+
+							// All
+							&__name,
+							&__gmail {
+								> p {
+									color: $primaryColorDark;
+									line-height: 100%;
+								}
+							}
+
+							// Name
+							&__name {
+								> p {
+									font-size: 1.4rem;
+									opacity: 0.8;
+								}
+							}
+
+							// Gmail
+							&__gmail {
+								> p {
+									font-size: 1.3rem;
+									margin-top: 0.5rem;
+									opacity: 0.6;
+								}
+							}
+						}
+
+						// Tools and System tools
+						.tools-ctn,
+						.system-tools-ctn {
+							$marginTopSize: 2rem;
+
+							@include size($toolsCtnWidth, false);
+							@include flex(column, center);
+							border-radius: 1rem;
+							margin-top: $marginTopSize;
+							overflow: hidden;
+
+							// All items
+							& > * {
+								@include size(100%, $toolsItemHeight);
+								@include flex(row, center);
+								padding: 0 $toolsItemPaddingLeftRight;
+								background-color: $primaryColorBlack;
+								transition: ease 0.2s;
+
+								// Hover handle
+								&:hover {
+									cursor: pointer;
+									background-color: $primaryColor;
+								}
+
+								// Icon
+								& > img {
+									$imageSize: $toolsIconSize;
+
+									@include size(false, 100%);
+									padding: ($toolsItemHeight - $imageSize) / 2;
+								}
+
+								// Label
+								& > span {
+									color: #fff;
+									font-size: 1.3rem;
+									font-weight: 500;
+								}
+							}
+						}
+
+						.system-tools-ctn {
+							margin-bottom: ($navbarRightDialogBoxWidth - $toolsCtnWidth) / 2;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Animation
+@keyframes dialogIconHover {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+	100% {
+		transform: scale(1);
+	}
+}

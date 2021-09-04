@@ -1,0 +1,9 @@
+@import "../../style/ALL_PACKAGE";
+
+#home {
+	@include size(100%, false);
+
+	@import "./introduce/introduce.scss";
+	@import "./features/features.scss";
+	@import "./cdnList/cdn.scss";
+}

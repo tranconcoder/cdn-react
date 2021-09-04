@@ -1,0 +1,26 @@
+@import "./variables", "./font", "../../../style/ALL_PACKAGE";
+
+.nav {
+	@include size(false, $navbarHeight);
+	@include position(relative);
+	background-color: #fff;
+	padding: 0;
+	z-index: 100;
+
+	&-ctn {
+		@include size(false, 100%);
+		@include flex(row, center, space-between);
+		padding: 0 $navbarSeperateLeftRight;
+
+		& > * {
+			@include size(false, 100%);
+		}
+
+		// Left
+		@import "./navbarLeft";
+		// Center
+		@import "./navbarCenter";
+		// Right
+		@import "./navbarRight";
+	}
+}

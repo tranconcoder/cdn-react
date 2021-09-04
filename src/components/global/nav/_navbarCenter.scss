@@ -1,0 +1,44 @@
+&__center {
+	@include size(false, 100%);
+	@include flex(row, center);
+	@include position(absolute, 0, 50%);
+	transform: translateX(50%);
+
+	& > li {
+		@include position(relative);
+		padding: 1rem;
+		border-radius: 0.7rem;
+		transition: ease 0.3s;
+
+		&::after {
+			@include size(0%, 0.3rem);
+			@include pseudo;
+			@include position(absolute, false, 50%, 0);
+			transform: translateX(50%);
+			background-color: $primaryColorLightness;
+			transition: ease 0.15s;
+		}
+
+		&:hover {
+			cursor: pointer;
+
+			&::after {
+				@include size(100%, false);
+			}
+
+			> p {
+				color: $primaryColor;
+			}
+		}
+
+		> p {
+			color: $primaryColorLightness;
+			font: normal 500 1.4rem "Merriweather Sans", sans-serif;
+			transition: ease 0.3s;
+		}
+	}
+
+	& > *:not(:first-child) {
+		margin-left: $navbarCenterItemSeperate;
+	}
+}

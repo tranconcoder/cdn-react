@@ -1,0 +1,42 @@
+// Number
+$uploadMenuBoxContentItemCount: 4;
+// Size
+$uploadMenuBoxWidth: 80rem;
+$uploadMenuBoxHeight: 40rem;
+$uploadMenuBoxPositionTop: 10rem;
+$uploadMenuBoxBorderRadius: 2rem;
+$uploadMenuBoxNavbarHeight: 5rem;
+$uploadMenuBoxContentWidth: $uploadMenuBoxWidth *
+	$uploadMenuBoxContentItemCount;
+$uploadMenuBoxContentHeight: $uploadMenuBoxHeight -
+	$uploadMenuBoxNavbarHeight;
+$uploadMenuBoxContentItemWidth: $uploadMenuBoxContentWidth /
+	$uploadMenuBoxContentItemCount;
+$uploadMenuBoxContentItemHeight: $uploadMenuBoxContentHeight;
+$uploadMenuBoxContentItemPadding: 3rem;
+$uploadMenuBoxInputCtnWidth: 70rem;
+$uploadMenuBoxInputCtnHeight: 4.6rem;
+$uploadMenuBoxFileNameCtnWidth: 70rem;
+$uploadMenuBoxFileNameCtnHeight: 2rem;
+$uploadMenuBoxUploadingItemWidth: 70rem;
+$uploadMenuBoxUploadingItemHeight: 9rem;
+$uploadMenuBoxUploadingItemSeperate: 2rem;
+$uploadMenuBoxUploadingCancelBtnHeight: 3.6rem;
+$uploadMenuBoxUploadingCancelBtnWidth: 8rem;
+// Color
+$primaryColor: #3945ba;
+$primaryColorLightness: #4758eb;
+$primaryColorBlack: #3440a5;
+$primaryColorDark: #2b3486;
+$textColor: #555555;
+$textColorLightness: #8d8d8d;
+$inputBackgroundColor: #ebebebff;
+$uploadMenuInfoPrimaryColor: #007cffff;
+$uploadMenuJsPrimaryColor: #ffae00ff;
+$uploadMenuCssPrimaryColor: #0097ddff;
+$uploadMenuNextBtnPrimaryColor: #00ff55ff;
+$uploadMenuPrevBtnPrimaryColor: #ff4949ff;
+$uploadMenuUploadBtnPrimaryColor: #00c3ffff;
+$uploadMenuHideBtnPrimaryColor: #00b7ffff;
+$uploadMenuUploadBtnPrimaryColor: #00ff55ff;
+$uploadMenuBoxUploadingCancelBtnPrimaryColor: #ff4949ff;

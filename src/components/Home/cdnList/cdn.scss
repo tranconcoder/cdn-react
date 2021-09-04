@@ -1,0 +1,11 @@
+.cdn {
+	&__header {
+		@include size(100%, 20rem);
+		@include position(relative);
+
+		&__edge-box {
+			@include size(50%, 100%);
+			@include edge(100%, 100%, "top", "left", $primaryColorLightness, #fff);
+		}
+	}
+}

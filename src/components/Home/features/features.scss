@@ -1,0 +1,92 @@
+.features {
+	&__header {
+		$edgeWidth: 50%;
+		$headerHeight: 20rem;
+
+		@include position(relative);
+
+		.header__edge {
+			@include size($edgeWidth, $headerHeight);
+			@include edge(100%, $headerHeight, "top", "left", #fff, $primaryColorLightness);
+		}
+
+		.header__block {
+			@include size($edgeWidth, $headerHeight);
+			margin-left: $edgeWidth;
+			background-color: $primaryColorLightness;
+		}
+	}
+
+	&__body {
+		@include flex(row, stretch, center);
+		background-color: $primaryColorLightness;
+		padding-bottom: 10rem;
+
+		&__thumb {
+			@include position(relative);
+			margin-right: 10rem;
+
+			> img {
+				@include size(60rem, auto);
+				@include position(relative);
+				// background-color: rgba(255, 255, 255, 0.02);
+				border-radius: 1rem;
+				padding: 0 4rem;
+				z-index: 2;
+			}
+		}
+
+		&__features-ctn {
+			$itemWidth: 50rem;
+
+			@include flex(column, center, center);
+
+			& > * {
+				@include size($itemWidth, 8rem);
+				@include flex(row, center);
+				border-radius: 1rem;
+				background-color: $primaryColor;
+				box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+				transition: linear 0.1s;
+
+				&:hover {
+					background-color: #fff;
+					cursor: pointer;
+
+					> * {
+						color: $primaryColor;
+					}
+
+					> i:not(:first-child) {
+						opacity: 1;
+					}
+				}
+
+				&:not(:first-child) {
+					margin-top: 2rem;
+				}
+
+				> i {
+					color: #fff;
+					font-size: 3rem;
+					line-height: 1;
+					margin-left: 3rem;
+					margin-right: 2rem;
+
+					&:not(:first-child) {
+						opacity: 0;
+						transition: linear 0.3s;
+						font-size: 2.4rem;
+					}
+				}
+
+				> p {
+					color: #fff;
+					font-size: 2rem;
+					font-weight: 600;
+					margin-right: auto;
+				}
+			}
+		}
+	}
+}

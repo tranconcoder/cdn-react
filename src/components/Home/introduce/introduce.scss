@@ -1,0 +1,51 @@
+.introduce {
+	@include maxSize(false, 70rem);
+	@include position(relative);
+	@include flex(row, center);
+
+	.illustrator-box {
+		margin-left: 4rem;
+
+		> img {
+			@include size(60rem, false);
+		}
+	}
+
+	.content-box {
+		@include size(50rem, false);
+		user-select: none;
+
+		> h3 {
+			color: $primaryColorBlack;
+			font-size: 9rem;
+			font-weight: 700;
+			line-height: 1;
+			background: -webkit-linear-gradient(0deg, $primaryColor, $primaryColorLightness);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+		}
+
+		> p {
+			color: $primaryColorBlack;
+			font-size: 1.6rem;
+			opacity: 0.7;
+		}
+
+		> button {
+			@include size(12rem, 4rem);
+			@include btnFloatRight($primaryColor, #fff, 0.2rem, ease 0.3s);
+			border-radius: 0.5rem;
+			margin-top: 1rem;
+
+			> p {
+				font-size: 1.6rem;
+				font-weight: 500;
+			}
+		}
+	}
+
+	.style-box-1 {
+		@include size(50%, 30rem);
+		@include edge(100%, 30rem, "bottom", "right", $primaryColorLightness);
+	}
+}

@@ -1,0 +1,133 @@
+@import "../../../style/ALL_PACKAGE";
+
+.footer {
+	@include flex(row);
+	background-color: $primaryColorBlack;
+	padding: 6rem 16rem;
+
+	&__left-slider {
+		@include size(100%, auto);
+
+		// All items
+		// Item Container
+		> div {
+			// Item
+			> div {
+				transition: linear 0.3s;
+
+				> header > p {
+					@include marHonrizontal(auto);
+					color: #fff;
+					font-size: 1.6rem;
+					font-weight: bolder;
+					user-select: none;
+				}
+
+				// List items
+				> div > ul {
+					margin-top: 2rem;
+
+					> li {
+						> a {
+							color: #fff;
+							font-size: 1.4rem;
+							opacity: 0.8;
+
+							&:hover {
+								opacity: 1;
+							}
+						}
+
+						&:not(:first-child) {
+							margin-top: 1rem;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&__right-slider {
+		@include size(35rem, false);
+		@include flex(column);
+
+		&__fb-ctn,
+		&__gmail-ctn {
+			@include flex(row, center);
+
+			& {
+				margin-bottom: 1.4rem;
+			}
+
+			> img {
+				@include size(3.6rem);
+			}
+			.fb-ctn__info,
+			.gmail-ctn__info {
+				@include flex(column);
+				margin-left: 1rem;
+
+				& {
+					&__link {
+						color: #fff;
+						font-size: 1.2rem;
+
+						&:hover {
+							text-decoration: underline;
+						}
+					}
+				}
+
+				&__name {
+					color: #fff;
+					font-size: 1.4rem;
+				}
+			}
+
+			.gmail-ctn__info__gmail-address {
+				@include flex(row, center);
+				color: #fff;
+
+				> p {
+					font-size: 1.2rem;
+				}
+
+				> i {
+					@include position(relative);
+					font-size: 1.6rem;
+					line-height: 1;
+					margin-left: 1rem;
+
+					&:hover {
+						cursor: pointer;
+
+						&::after {
+							display: block;
+						}
+					}
+
+					&::after {
+						@include pseudo;
+						@include size(12rem, false);
+						@include position(
+							absolute,
+							calc(50% - 0.1rem),
+							false,
+							false,
+							calc(100% + 1rem)
+						);
+						@include padVertical(0.5rem);
+						content: "Click to COPY!";
+						transform: translateY(-50%);
+						color: $primaryColorBlack;
+						font: 700 1.2rem "Merriweather Sans", sans-serif;
+						text-align: center;
+						background-color: #fff;
+						border-radius: 0.4rem;
+						display: none;
+					}
+				}
+			}
+		}
+	}
+}
